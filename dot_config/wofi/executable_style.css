@@ -1,0 +1,42 @@
+/*****************************************************************************
+*  _  _  _  _____  _______ _____      _______ _______ __   __        _______
+*  |  |  | |     | |______   |        |______    |      \_/   |      |______
+*  |__|__| |_____| |       __|__      ______|    |       |    |_____ |______
+*
+*****************************************************************************/
+#window {
+	background-color: alpha(--wofi-color8,0.95);
+	font-family: "FiraMonoNerdFont", "RobotoMonoNerdFont", "Arial", "sans-serif";
+	font-size: 26px;
+	border-radius: 10px;
+	border: 1px solid --wofi-color5;
+}
+
+#input {
+	background-color: alpha(--wofi-color0, 0.95);
+	padding: 5px 5px;
+	color: --wofi-color7;
+	border-color: --wofi-color7;
+	border-radius: 10px;
+}
+
+#img {
+	padding: 5px;
+}
+
+#entry {
+	padding: 3px;
+	color: --wofi-color5;
+}
+
+#text:selected {
+	color: --wofi-color7;
+	text-shadow: 1px 2px 2px --wofi-color0;
+}
+
+#entry:selected {
+	margin: 2px 2px;
+	background: linear-gradient(90deg, alpha(--wofi-color2, 0.9), alpha(--wofi-color4, 0.9));
+	border-radius: 10px;
+	border: none;
+}

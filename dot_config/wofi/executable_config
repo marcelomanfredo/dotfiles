@@ -1,0 +1,21 @@
+########################################
+#  _  _  _  _____  _______ _____
+#  |  |  | |     | |______   |  
+#  |__|__| |_____| |       __|__
+#                              
+########################################
+# All this info where gathered in man(5).
+
+color=/home/manfredo/.cache/wal/colors
+style=/home/manfredo/.config/wofi/style.css
+
+mode=drun,run
+width=35%
+height=25%
+prompt=Search...
+allow_images=true
+image_size=24
+insensitive=true
+key_up=Alt-j
+key_down=Alt-k
+hide_scroll=true

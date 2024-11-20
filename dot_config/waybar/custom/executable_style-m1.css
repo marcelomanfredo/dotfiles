@@ -1,0 +1,158 @@
+
+@import url('../../../.cache/wal/colors-waybar-m1.css');
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	font-family: FiraMonoNerdFont, RobotoMonoNerdFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+window {
+	background: transparent;
+}
+
+.modules-left,
+.modules-center {
+	font-size: 14px;
+	color: @color7;
+}
+
+.modules-right {
+	font-size: 11px;
+	color: @color5;
+}
+
+tooltip {
+	background: alpha(@color0, 0.9);
+	border: 2px solid @color4;
+	border-radius: 10px;
+}
+
+tooltip label {
+	padding: 2px 5px;
+	color: @color7;
+	font: 13px RobotoMonoNerdFont;
+}
+
+button {
+	font-size: 14px;
+	padding: 0 15px 0 5px;
+	color: @color5;
+}
+
+button:hover {
+	transition: none;
+	background: transparent;
+	box-shadow: none;
+	text-shadow: 1px 1px 5px @color4;
+}
+
+#workspaces {
+	margin: 3px;
+	padding: 0 5px;
+	border: 2px solid @color4;
+	border-radius: 30px;
+}
+
+#custom-arch_logo{
+	margin: 0 0 0 5px;
+}
+
+#window {
+	padding: 0 5px;
+	transition: none;
+	box-shadow: none;
+	text-shadow: 1px 2px 1px @color0;
+}
+
+#idle_inhibitor {
+	padding: 0 18px 0 13px;		
+}
+
+#idle_inhibitor.activated {
+	background: alpha(@color7, 0.25);
+	color: @color0;
+	border-radius: 50%;
+}
+
+#audio {
+	margin: 3px;
+	padding: 0 5px;
+	border: 2px solid @color4;
+	border-radius: 30px
+}
+
+#custom-media {
+	padding: 0 5px;
+	font-size: 12px;
+}
+
+#pulseaudio {
+	padding: 0 8px 0 5px;
+}
+
+#system {
+	margin: 3px;
+	padding: 0 5px;
+	border: 2px solid @color4;
+	border-radius: 30px;
+}
+
+#cpu,
+#temperature,
+#memory {
+	padding: 0 5px;
+}
+
+#temperature {
+	margin: 0 10px;
+}
+
+#g-network {
+	margin: 3px;
+	padding: 0 5px;
+	border: 2px solid @color4;
+	border-radius: 30px;
+}
+
+#network {
+	padding: 0 5px;
+}
+
+#infos {
+	margin: 3px;
+	padding: 0 5px;
+	border: 2px solid @color4;
+	border-radius: 30px;
+}
+
+#clock {
+	padding-left: 8px;
+	margin-right: 3px;
+}
+
+#custom-weather {
+	padding: 0 5px;
+}
+
+#idle_inhibitor:hover,
+#cpu:hover,
+#temperature:hover,
+#memory:hover,
+#custom-media:hover,
+#pulseaudio:hover,
+#network:hover,
+#clock:hover,
+#custom-weather:hover {
+	box-shadow: inset 0 1px @color4
+}
+
+#custom-power {
+	padding: 0 5px;
+	margin-right: 12px;
+	color: red;
+	text-shadow: 1px 1px 3px @error_color;
+}
+

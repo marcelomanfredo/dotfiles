@@ -1,0 +1,60 @@
+@import url('../../.cache/wal/colors-waybar-m1.css');
+
+* {
+	font-family: FiraMonoNerdFont, RobotoMonoNerdFont, Arial, sans-serif;
+	background-image: none;
+	box-shadow: none;
+	text-shadow: none;
+	transition: 100ms;
+}
+
+window {
+	background: url("../../.cache/wal/blurred-wp.jpg");
+}
+
+button {
+    color: @color5;
+    font-size: 20px;
+    border: 2px solid @color0;
+    border-radius: 20px;
+    margin: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    background-color: rgba(12, 12, 12, 0.7);
+}
+
+button:focus,
+button:active,
+button:hover {
+	color: @color5;
+	background-color: alpha(@color0, 0.9);
+	border-color: @color5;
+}
+
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+}
