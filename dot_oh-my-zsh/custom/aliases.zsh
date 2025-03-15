@@ -1,17 +1,17 @@
 # Aliases for system opts
 
 # Zsh
-alias zshconf="nvim ~/.zshrc"
-alias zshalias="nvim ~/.oh-my-zsh/custom/aliases.zsh"
+alias zshconf="nvim ~/.local/share/chezmoi/dot_zshrc"
+alias zshalias="nvim ~/.local/share/chezmoi/dot_oh-my-zsh/custom/aliases.zsh"
 
 # Hyprland
-alias hyprconf="nvim ~/.config/hypr/"
+alias hyprconf="nvim ~/.local/share/chezmoi/dot_config/hypr/"
 
 # Waybar
-alias wayconf="nvim ~/.config/waybar"
+alias wayconf="nvim ~/.local/share/chezmoi/dot_config/waybar"
 
 # Foot
-alias footconf="nvim ~/.config/foot/foot.ini"
+alias footconf="nvim ~/.local/share/chezmoi/dot_config/foot/foot.ini"
 
 # Quality of Life
 alias c="clear -x"
@@ -22,4 +22,4 @@ alias psql="psql gondor"
 
 # Tmux
 alias tg="tmux new -s gondor -c ~/Projects/Gondor"
-alias tc="tmux new -s config -c ~/.config"
+alias tc="tmux new -s config -c ~/.local/share/chezmoi/dot_config"
