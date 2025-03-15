@@ -135,3 +135,15 @@ lsp.gopls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
+-- C and C++
+lsp.clangd.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
+-- Python
+lsp.basedpyright.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
