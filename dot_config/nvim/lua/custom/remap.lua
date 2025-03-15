@@ -15,6 +15,18 @@ vim.keymap.set({ "n", "v" }, '<leader>y', [["+y]],
 vim.keymap.set({ "n", "v" }, '<leader>d', [["_d]], { desc = "Deletes current line or selected text into the void" })
 vim.keymap.set('n', '<leader><leader>l', function() vim.opt.list = not vim.opt.list:get() end,
     { desc = "Toggle \"list\" on and off - nom printable characters" })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = "Exit terminal mode" })
+vim.keymap.set('n', '<leader><leader>r', function()
+    -- Get the current word under the cursor
+    local word = vim.fn.expand('<cword>')
+
+    vim.ui.input({ prompt = "Replace \'" .. word .. "\' with: ", default = word }, function(input)
+        if input then
+            -- Perform global replacement
+            vim.cmd('%s/' .. word .. '/' .. input .. '/g')
+        end
+    end)
+end, { desc = 'Performs a simple word under cursor replace' })
 
 
 -- SQL dadbod
@@ -23,7 +35,7 @@ vim.keymap.set('n', '<leader>sf', '<cmd>DBUIFindBuffer<cr>')
 
 
 -- Source current lua file to neovim config
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>')
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>', { desc = "Source current Lua file" })
 
 
 -- Fugitive git
@@ -31,7 +43,7 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
 
 -- Undotree toggle
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "Toggle undotree view" })
 
 
 -- Move lines

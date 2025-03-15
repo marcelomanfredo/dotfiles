@@ -1,6 +1,7 @@
 # Quality of Life
 alias c="clear -x"
 alias temp="watch -n 10 nvidia-smi"
+alias conf="chezmoi edit ~/.config/"
 
 # Zsh
 alias zshconf="chezmoi edit ~/.zshrc"

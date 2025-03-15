@@ -77,7 +77,16 @@ temp_min_max = f" {temp_min.replace('°', '')}\t\t {temp_max.replace('�
 # print(temp_min_max)
 
 # wind speed
-wind_speed = html_data("div[data-testid='wxData'] > span[data-testid='Wind']").text().split("\n")[1]
+# wind_speed = html_data("div[data-testid='wxData'] > span[data-testid='Wind']").text().split("\n")[1]
+# wind_text = f"  {wind_speed}"
+wind_text = html_data("div[data-testid='wxData'] > span[data-testid='Wind']").text()
+wind_split = wind_text.split("\n")
+
+# Check if the split text has at least 2 elements
+if len(wind_split) > 1:
+    wind_speed = wind_split[1]
+else:
+    wind_speed = "N/A"  # Set a default value if there's no wind speed data
 wind_text = f"  {wind_speed}"
 # print(wind_text)
 

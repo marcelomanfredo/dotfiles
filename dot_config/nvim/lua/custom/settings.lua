@@ -16,7 +16,12 @@ vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
 -- Stop "o" and "O" to insert line with comment
-vim.opt.formatoptions:remove "oO"
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "lua",
+    callback = function()
+        vim.opt_local.formatoptions:remove("o")
+    end
+})
 
 vim.opt.wrap = false
 

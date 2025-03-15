@@ -3,6 +3,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "tpope/vim-fugitive",
     "neovim/nvim-lspconfig",
+    "ray-x/lsp_signature.nvim",
     "christoomey/vim-tmux-navigator",
     {
         "nvim-lua/plenary.nvim",

@@ -51,6 +51,13 @@ cmp.setup({
             },
         },
     },
+
+    completion = {
+        autocomplete = {
+            cmp.TriggerEvent.TextChanged,
+            cmp.TriggerEvent.InsertEnter,
+        },
+    },
 })
 
 cmp.setup.cmdline({ '/', '?' }, {

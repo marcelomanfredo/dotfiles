@@ -125,7 +125,7 @@
 		},
 		"scroll-step": 5.0,
 		// credits: "custom/pulseaudio-cycle", available on Wiki
-		"on-click": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")+1)%length)]\" | xargs pactl set-default-sink",
+        "on-click": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")+1)%length)]\" | xargs pactl set-default-sink",
 		"on-click-right": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")-1)%length)]\" | xargs pactl set-default-sink",
 		"tooltip-format": "{desc}",
 		"max-voume": 100
@@ -152,7 +152,7 @@
 
 	"custom/media": {
 		"hide-empty-text": true,
-		"format": "{icon} {:25}",
+		"format": "{icon} {text:25}",
 		"escape": true,
 		"return-type": "json",
 		"max-length": 25,

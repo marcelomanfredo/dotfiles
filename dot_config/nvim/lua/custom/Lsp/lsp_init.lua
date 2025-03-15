@@ -1,12 +1,24 @@
 local lsp = require 'lspconfig'
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 local on_attach = function(client, bufnr)
     local function buf_set_option(option, value)
         vim.api.nvim_set_option_value(option, value, { buf = bufnr })
     end
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    require 'lsp_signature'.on_attach({
+        bind = true,
+        hint_enabled = true,
+        hi_parameter = "LspSignatureActiveParameter",
+        floating_window = true,
+        fix_pos = true,
+    })
+
+    if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
 
     if client.server_capabilities.document_highlight then
         vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
@@ -68,32 +80,22 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end
 })
 
-
 -- Lua
 lsp.lua_ls.setup {
     capabilities = capabilities,
     on_attach = on_attach,
-    on_init = function(client)
-        local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
-            return
-        end
-
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+    settings = {
+        Lua = {
             runtime = {
-                version = 'LuaJIT'
+                version = 'LuaJIT',
             },
-            -- Make the server aware of Neovim runtime files
             workspace = {
                 checkThirdParty = false,
                 library = {
                     vim.env.VIMRUNTIME
-                }
-            }
-        })
-    end,
-    settings = {
-        Lua = {}
+                },
+            },
+        }
     }
 }
 
