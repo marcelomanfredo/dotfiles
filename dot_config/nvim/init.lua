@@ -44,8 +44,11 @@ require("lazy").setup({
 require "custom"
 
 -- Set colorscheme
-vim.cmd("colorscheme kanagawa-wave")
+--vim.cmd("colorscheme kanagawa-wave")
 --vim.cmd("colorscheme kanagawa-dragon")
 --vim.cmd("colorscheme tokyonight-night")
 --vim.cmd("colorscheme tokyonight-moon")
 --vim.cmd("colorscheme tokyonight-storm")
+--vim.cmd("colorscheme catppuccin-frappe")
+vim.cmd("colorscheme catppuccin-macchiato")
+--vim.cmd("colorscheme catppuccin-mocha")
