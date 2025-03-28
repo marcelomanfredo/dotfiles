@@ -67,3 +67,6 @@ vim.keymap.set('n', '<M-]>', '<cmd>resize -5<CR>')
 vim.keymap.set('n', '<M-[>', '<cmd>resize +5<CR>')
 vim.keymap.set('n', '<M-,>', '<cmd>vertical resize -5<CR>')
 vim.keymap.set('n', '<M-.>', '<cmd>vertical resize +5<cr>')
+
+-- Markdown Preview toggle
+vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreviewToggle<cr>', { desc = "Toggles Markdown Preview into firefox" })

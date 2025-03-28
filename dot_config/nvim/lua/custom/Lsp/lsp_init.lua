@@ -47,9 +47,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<leader>K', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
     vim.keymap.set('n', '<leader><leader>f', vim.cmd.LspFormat,
         vim.tbl_extend('force', opts, { desc = "Format if LSP supports it" }))
@@ -62,7 +60,7 @@ vim.api.nvim_create_user_command('LspFormat', function()
     local should_format = false
 
     for _, client in ipairs(clients) do
-        if client.server_capabilities.documentFormattingProvider then
+        if client.server_capabilities.documentFormattingProvider or client.server_capabilities.documentRangeFormattingProvider then
             should_format = true
             break
         end
@@ -72,6 +70,16 @@ vim.api.nvim_create_user_command('LspFormat', function()
         vim.lsp.buf.format({ bufnr = bufnr })
     end
 end, { force = true, desc = "Save and auto-format if LSP supports it" })
+
+-- Set up diagnostics config
+vim.diagnostic.config({
+    virtual_text = true,
+    --virtual_lines = true,
+    float = {
+        source = true,
+        border = "rounded"
+    }
+})
 
 -- Auto-Format before save
 vim.api.nvim_create_autocmd('BufWritePre', {
