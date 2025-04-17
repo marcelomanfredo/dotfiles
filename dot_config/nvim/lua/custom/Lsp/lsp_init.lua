@@ -157,3 +157,9 @@ lsp.basedpyright.setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
+-- Emmet
+lsp.emmet_language_server.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
