@@ -1,10 +1,11 @@
 -- Quality of life
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex) -- Go to Project View (explorer)
-vim.keymap.set('n', 'J', 'mzJ`z')             -- When appending lines with 'J', make cursor stay at the beggining of the line
-vim.keymap.set('n', '<C-d>', '<C-d>zz')       -- Make cursor stay at the middle
-vim.keymap.set('n', '<C-u>', '<C-u>zz')       -- Make cursor stay at the middle
-vim.keymap.set('n', 'n', 'nzzzv')             -- Make cursor stay at the middle
-vim.keymap.set('n', 'N', 'Nzzzv')             -- Make cursor stay at the middle
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = "Go to Project View (explorer)" })
+vim.keymap.set('n', 'J', 'mzJ`z',
+    { desc = "When appending lines with 'J', make cursor stay at the beggining of the line" })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Make cursor stay at the middle" })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Make cursor stay at the middle" })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = "Make cursor stay at the middle" })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = "Make cursor stay at the middle" })
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = "Delete current selection to void and paste last copied text" })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = "Yank current line to system clipboard" })
 vim.keymap.set({ "n", "v" }, '<leader>y', [["+y]],
@@ -27,6 +28,10 @@ vim.keymap.set('n', '<leader><leader>r', function()
         end
     end)
 end, { desc = 'Performs a simple word under cursor replace' })
+vim.keymap.set('n', '<leader>h', function()
+    local f = vim.fn.expand("%:p")
+    vim.fn.jobstart({ "xdg-open", f }, { detach = true })
+end, { desc = "Starts a live server to preview HTML changes" })
 
 
 -- SQL dadbod
