@@ -1,8 +1,9 @@
+-- This file is being called from nvim/lua/custom/plugins/completion_lsp.lua
+
 require 'custom.Lsp.config.snip'
 
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.shortmess:append "ac"
-
 
 local cmp = require 'cmp'
 local mappings = {
