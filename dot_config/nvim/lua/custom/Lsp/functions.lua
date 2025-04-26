@@ -74,7 +74,7 @@ end, { force = true, desc = "Save and auto-format if LSP supports it" })
 -- Set up diagnostics config
 vim.diagnostic.config({
     virtual_text = true,
-    virtual_lines = true,
+    --virtual_lines = true,
     float = {
         source = true,
         border = "rounded"
