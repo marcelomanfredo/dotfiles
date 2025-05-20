@@ -64,6 +64,7 @@
 		"separate-outputs": true,
 		"rewrite": {
 			"^(.*)Firefox$": "Firefox 󰨇",
+			"^(.*)Google Chrome$": "Google Chrome 󰨇",
 			"^(.*\\| )(.*)Discord$": "$2 Discord 󰙯",
 			"^.*Steam.*$": "Steam "
 		}

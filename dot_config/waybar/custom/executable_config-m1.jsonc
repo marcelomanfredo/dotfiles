@@ -11,7 +11,7 @@
     // Choose the order of the modules
     // ***********************************
     "modules-left": [
-	"custom/arch_logo",
+        "custom/arch_logo",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -19,10 +19,10 @@
     ],
     "modules-right": [
         "idle_inhibitor",
-	"group/audio",
-	"group/system",
-	"group/g-network",
-	"group/infos",
+        "group/audio",
+        "group/system",
+        "group/g-network",
+        "group/infos",
         "custom/power"
     ]
 }
