@@ -32,6 +32,12 @@ vim.keymap.set('n', '<leader>h', function()
     local f = vim.fn.expand("%:p")
     vim.fn.jobstart({ "xdg-open", f }, { detach = true })
 end, { desc = "Starts a live server to preview HTML changes" })
+vim.keymap.set('n', '<leader><leader>w',
+    function()
+        vim.opt.wrap = not vim.opt.wrap:get()
+        vim.opt.linebreak = not vim.opt.linebreak:get()
+    end,
+    { desc = "Toggle line wrap" })
 
 
 -- SQL dadbod
