@@ -24,7 +24,7 @@ while true; do
 
     wal -i $wallpaper1 -n
     cp ~/.cache/wal/colors-waybar.css ~/.cache/wal/colors-waybar-m1.css
-    ~/.config/hypr/scripts/create_colors.sh ~/.cache/wal/colors.json ~/.cache/wal/colors-hyprland.conf
+    ~/.config/hypr/scripts/create_colors.sh ~/.cache/wal/colors.json ~/.config/hypr/conf/colors.conf
     
     sleep 2
 

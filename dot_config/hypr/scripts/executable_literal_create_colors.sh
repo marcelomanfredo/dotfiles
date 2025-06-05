@@ -21,6 +21,7 @@ hex_to_rgba() {
     local hex="$1"
     hex="${hex//\"/}"  # Remove any quotes around the hex color
     hex="${hex#\#}"    # Remove the leading '#'
+    hex="${hex^^}"     # Convert to uppercase
     if [[ ${#hex} -eq 6 ]]; then
         local r="${hex:0:2}"
         local g="${hex:2:2}"
@@ -35,6 +36,7 @@ hex_to_rgba_format() {
 	local hex="$1"
 	hex="${hex//\"/}"
 	hex="${hex#\#}"
+    hex="${hex^^}"
 	echo "rgba($hex$alpha_value)"
 }
 
@@ -42,23 +44,33 @@ hex_to_rgb_format() {
 	local hex="$1"
 	hex="${hex//\"/}"
 	hex="${hex#\#}"
-	echo "rgba("$hex"FF)" #colors from 20 to 35 should be equal to 0 to 15, but with full opacity
+    hex="${hex^^}"
+	echo "rgb("$hex")" #colors from 19 to 35 should be equal to -1 to 15, but with full opacity
 }
 
-counter=20
-{
-	jq -r '.special | to_entries[] | "\(.key):\(.value)"' "$colors_file" | while IFS=":" read -r name hex; do
-		rgba=$(hex_to_rgba_format "$hex")
-		echo "\$$name = $rgba"
-	done
-
-	jq -r '.colors | to_entries[] | "\(.key):\(.value)"' "$colors_file" | while IFS=":" read -r name hex; do
-		rgba=$(hex_to_rgba_format "$hex")
-		rgb=$(hex_to_rgb_format "$hex")
-		echo "\$$name = $rgba"
-		echo "\$color$counter = $rgb"
-		((counter++))
-	done
+# Convert every "special" color (e.g., background, foreground)
+{ 
+    jq -r '.special | to_entries[] | "\(.key):\(.value)"' "$colors_file" | while IFS=":" read -r name hex; do
+        rgba=$(hex_to_rgba_format "$hex")
+        echo "\$$name = $rgba"
+    done
 } > $output_file
+
+# Convert every color, but without the alpha_value
+{ 
+    jq -r '.colors | to_entries[] | "\(.key):\(.value)"' "$colors_file" | while IFS=":" read -r name hex; do
+        rgb=$(hex_to_rgb_format "$hex")
+        echo "\$$name = $rgb"
+    done
+} >> $output_file
+
+
+# Convert every color, adding the alpha_value
+{
+    jq -r '.colors | to_entries[] | "\(.key):\(.value)"' "$colors_file" | while IFS=":" read -r name hex; do
+        rgba=$(hex_to_rgba_format "$hex")
+        echo "\$t$name = $rgba"
+    done
+} >> $output_file
 
 echo "RGB() values from $1 successfully written to $2! [Alpha of $alpha_value]"
