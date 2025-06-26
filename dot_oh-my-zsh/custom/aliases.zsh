@@ -21,4 +21,4 @@ alias footconf="chezmoi edit ~/.config/foot/foot.ini"
 #alias psql="psql gondor"
 
 # Tmux
-alias tn="tmux new -s nyx -c ~/Projects/Nyx"
+alias tn=". ~/.tmux/tmux-nyx.sh"
