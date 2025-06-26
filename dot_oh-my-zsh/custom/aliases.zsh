@@ -18,7 +18,7 @@ alias wayconf="chezmoi edit ~/.config/waybar/"
 alias footconf="chezmoi edit ~/.config/foot/foot.ini"
 
 # Postgres
-alias psql="psql gondor"
+#alias psql="psql gondor"
 
 # Tmux
 alias tn="tmux new -s nyx -c ~/Projects/Nyx"
