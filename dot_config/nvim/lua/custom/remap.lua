@@ -81,3 +81,31 @@ vim.keymap.set('n', '<M-.>', '<cmd>vertical resize +5<cr>')
 
 -- Markdown Preview toggle
 vim.keymap.set('n', '<leader>m', '<cmd>MarkdownPreviewToggle<cr>', { desc = "Toggles Markdown Preview into firefox" })
+
+
+-- SQL formatter
+local function sqruff_format()
+    if vim.bo.filetype ~= "sql" then
+        vim.notify("Not a SQL file", vim.log.levels.INFO)
+        return
+    end
+
+    local filepath = vim.api.nvim_buf_get_name(0)
+    local buf_contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local input = table.concat(buf_contents, "\n")
+
+    local cmd = { "pg_format", "-abg", "--redundant-parenthesis", "--no-space-function", filepath }
+    --[[
+    -a: obscure all literals in queries.
+    -b: start with the comma in parameters list > useful for quick comments.
+    -g: add a newline between statements in transactions regroupement. Add readability.
+    --redundant-parenthesis: do not remove redundant parenthesis in DML.
+    --no-space-function: remove space between function call and the open parenthesis.
+	]]
+
+    local output = vim.fn.system(cmd, input)
+    local lines = vim.split(output, "\n")
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.notify("Formatting was successful", vim.log.levels.INFO)
+end
+vim.keymap.set('n', '<leader>fs', sqruff_format, { desc = "Format SQL files" })
