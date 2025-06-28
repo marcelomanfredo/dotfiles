@@ -1,8 +1,10 @@
-local lsp = require 'lspconfig'
+local M = {}
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+M.lsp = require 'lspconfig'
 
-local on_attach = function(client, bufnr)
+M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+M.on_attach = function(client, bufnr)
     local function buf_set_option(option, value)
         vim.api.nvim_set_option_value(option, value, { buf = bufnr })
     end
@@ -88,9 +90,26 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end
 })
 
+M.load_env = function()
+    return function(project_path)
+        local env_path = project_path .. "/.env"
+        local file = io.open(env_path, "r")
+        if not file then
+            vim.notify("No \".env\" file found.", vim.log.levels.ERROR)
+            return
+        end
 
-return {
-    lsp = lsp,
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
+        for line in file:lines() do
+            local k, v = line:match("^%s*([%w_]+)%s*=%s*(.-)%s*$") -- Wtf is this regex?
+            if k and v and v ~= "" and not v:match("^#") then
+                -- Remove surround quotes
+                v = v:gsub("^['\"]", ""):gsub("['\"]$", "")
+                vim.fn.setenv(k, v)
+            end
+        end
+
+        file:close()
+    end
+end
+
+return M

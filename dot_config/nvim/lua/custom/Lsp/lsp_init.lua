@@ -3,6 +3,14 @@ local fn = require 'custom.Lsp.functions'
 local lsp = fn.lsp
 local on_attach = fn.on_attach
 local capabilities = fn.capabilities
+-- Loads environment variables from a `.env` file in the current working directory into Neovim's environment (use when needed)
+--[[
+local load_env = fn.load_env
+local project_path = vim.fn.expand("$HOME/Projects/Nyx/nyx") -- We could make this path loop through a map, so multiple projects can be available.
+if vim.fn.getcwd():find(project_path, 1, true) == 1 then
+    load_env(project_path)
+end
+]]
 
 -- Lua
 lsp.lua_ls.setup {
