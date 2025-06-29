@@ -21,13 +21,13 @@ tmux setw -t $SESSION pane-base-index 1
 # Create real Window 1: Nyx (Neovim main + Cargo watch)
 tmux neww -t $SESSION:1 -n "Nyx" -c "$PROJECT_DIR/nyx" \
   "bash -c ' \
-    nvim .;
+    nvim .; \
     exec zsh'"
 tmux splitw -h -t $SESSION:1 -c "$PROJECT_DIR/nyx" \
-    "bash -c ' \
-        cargo watch -c -q -x run;
-        exec zsh'"
-tmux resizep -t $SESSION:1.1 -x 3
+  "bash -c ' \
+    cargo watch -c -q -w src -x run; \
+    exec zsh'"
+tmux resizep -t $SESSION:1.1 -x 2
 tmux selectp -t $SESSION:1.0
 
 # Window 2: Nyx-Wasm (Neovim + Trunk)
@@ -37,9 +37,9 @@ tmux neww -t $SESSION:2 -n "Nyx-Wasm" -c "$PROJECT_DIR/nyx-wasm" \
     exec zsh'"
 tmux splitw -h -t $SESSION:2 -c "$PROJECT_DIR/nyx-wasm" \
   "bash -c ' \
-    trunk serve --open -c -q;
+    trunk serve --open -c -q; \
     exec zsh'"
-tmux resizep -t $SESSION:2.1 -x 3
+tmux resizep -t $SESSION:2.1 -x 2
 tmux selectp -t $SESSION:2.0
 
 # Window 3: PostgreSQL (Check if 
