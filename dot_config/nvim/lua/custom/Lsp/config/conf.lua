@@ -78,6 +78,19 @@ cmp.setup.cmdline(':', {
     matching = { disallow_symbol_nonprefix_matching = false }
 })
 
+-- Disable builtin SQL completion, allowing only dadbod
+vim.g.loaded_sql_complete = 1
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sql",
+    callback = function()
+        -- Disable problematic keymaps from built-in sql ftplugin
+        local keys = { "<C-C>v", "<C-C>c", "<C-C>s", "<C-C>f", "<C-C>L", "<C-C>k", "<C-C>o", "<C-C>T",
+            "<C-C>l", "<C-C>R", "<C-C>p", "<C-C>a", "<C-C>t", "<C-C>v" }
+        for _, key in ipairs(keys) do
+            pcall(vim.api.nvim_buf_del_keymap, 0, 'i', key)
+        end
+    end
+})
 cmp.setup.filetype({ "sql" }, {
     sources = {
         { name = "vim-dadbod-completion" },

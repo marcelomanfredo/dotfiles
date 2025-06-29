@@ -18,11 +18,17 @@ tmux new -d -s $SESSION -c "$PROJECT_DIR"
 tmux set-option -t $SESSION base-index 1
 tmux setw -t $SESSION pane-base-index 1
 
-# Create real Window 1: Nyx (Neovim main)
+# Create real Window 1: Nyx (Neovim main + Cargo watch)
 tmux neww -t $SESSION:1 -n "Nyx" -c "$PROJECT_DIR/nyx" \
   "bash -c ' \
     nvim .;
     exec zsh'"
+tmux splitw -h -t $SESSION:1 -c "$PROJECT_DIR/nyx" \
+    "bash -c ' \
+        cargo watch -c -q -x run;
+        exec zsh'"
+tmux resizep -t $SESSION:1.1 -x 3
+tmux selectp -t $SESSION:1.0
 
 # Window 2: Nyx-Wasm (Neovim + Trunk)
 tmux neww -t $SESSION:2 -n "Nyx-Wasm" -c "$PROJECT_DIR/nyx-wasm" \
@@ -33,7 +39,8 @@ tmux splitw -h -t $SESSION:2 -c "$PROJECT_DIR/nyx-wasm" \
   "bash -c ' \
     trunk serve --open -c -q;
     exec zsh'"
-tmux resizep -t $SESSION:2.1 -x5
+tmux resizep -t $SESSION:2.1 -x 3
+tmux selectp -t $SESSION:2.0
 
 # Window 3: PostgreSQL (Check if 
 tmux neww -t $SESSION:3 -n "DB" -c "$PROJECT_DIR" \
@@ -51,6 +58,6 @@ tmux new-window -t $SESSION:4 -n "Shell" -c "$PROJECT_DIR"
 tmux kill-window -t $SESSION:0
 
 # Focus on first real window
-tmux select-window -t $SESSION:1
+tmux selectw -t $SESSION:1
 tmux attach -t $SESSION
 
