@@ -34,29 +34,58 @@ M.on_attach = function(client, bufnr)
 
     --Mappings for lsp
     local opts = { buffer = bufnr, noremap = true, silent = true }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = "LSP: Go to Declaration" }))
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('force', opts, { desc = "LSP: Go to Definition" }))
+
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
+        vim.tbl_extend('force', opts, { desc = "LSP: Jumps to the declaration of the symbol under the cursor" }))
+
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
+        vim.tbl_extend('force', opts, { desc = "LSP: Jumps to the definition of the symbol under the cursor" }))
+
     vim.keymap.set('n', 'K', vim.lsp.buf.hover,
-        vim.tbl_extend('force', opts, { desc = "LSP: display hove information about the symbol under the cursor" }))
+        vim.tbl_extend('force', opts, { desc = "LSP: Display hove information about the symbol under the cursor" }))
+
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,
-        vim.tbl_extend('force', opts, { desc = "LSP: Go to Implementation" }))
-    vim.keymap.set('n', '<C-S-K>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        vim.tbl_extend('force', opts,
+            { desc = "LSP: Lists all the implementations for the symbol under the cursor in the quickfix window" }))
+
+    vim.keymap.set('n', '<C-S-K>', vim.lsp.buf.signature_help,
+        vim.table_extend('force', opts,
+            { desc = "LSP: Displays signature information about the symbol under the cursor in a floating window" }))
+
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder,
+        vim.table_extend('force', opts, { desc = "LSP: Add the folder at path to the workspace folders" }))
+
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
+        vim.table_extend('force', opts, { desc = "LSP: Remove the folder at path from the workspace folders" }))
+
     vim.keymap.set('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<leader>K', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+    end, vim.table_extend('force', opts, { desc = "LSP: List workspace folders" }))
+
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition,
+        vim.table_extend('force', opts,
+            { desc = "LSP: Jumps to the definition of the type of the symbol under the cursor" }))
+
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
+        vim.table_extend('force', opts, { desc = "LSP: Renames all references to the symbol under the cursor" }))
+
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references,
+        vim.table_extend('force', opts,
+            { desc = "LSP: Lists all the references to the symbol under the cursor in the quickfix window" }))
+
+    vim.keymap.set('n', '<leader>K', vim.diagnostic.open_float,
+        vim.table_extend('force', opts, { desc = "LSP: Show diagnostics in a floating window" }))
+
+    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist,
+        vim.table_extend('force', opts, { desc = "LSP: Add buffer diagnostics to the location list" }))
+
     vim.keymap.set('n', '<leader><leader>f', vim.cmd.LspFormat,
         vim.tbl_extend('force', opts, { desc = "Format if LSP supports it" }))
+
     vim.keymap.set('n', '<leader>dh', function()
         local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
         vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = 0 })
-    end, { desc = "Toggle inlay_hints" })
+    end, vim.table_extend('force', opts, { desc = "Toggle inlay_hints" }))
 end
 
 -- Auto format if LSP supports it
