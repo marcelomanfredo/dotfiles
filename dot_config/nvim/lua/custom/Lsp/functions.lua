@@ -80,12 +80,12 @@ M.on_attach = function(client, bufnr)
         vim.tbl_extend('force', opts, { desc = "LSP: Add buffer diagnostics to the location list" }))
 
     vim.keymap.set('n', '<leader><leader>f', vim.cmd.LspFormat,
-        vim.tbl_extend('force', opts, { desc = "Format if LSP supports it" }))
+        vim.tbl_extend('force', opts, { desc = "LSP: Format if LSP supports it" }))
 
     vim.keymap.set('n', '<leader>dh', function()
         local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
         vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = 0 })
-    end, vim.tbl_extend('force', opts, { desc = "Toggle inlay_hints" }))
+    end, vim.tbl_extend('force', opts, { desc = "LSP: Toggle inlay_hints" }))
 end
 
 -- Auto format if LSP supports it
