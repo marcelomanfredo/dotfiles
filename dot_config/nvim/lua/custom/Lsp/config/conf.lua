@@ -23,12 +23,21 @@ local lspkind = require "lspkind"
 lspkind.init()
 
 -- Nvim-cmp -> completion config
+--[[
+--Debug
+cmp.event:on("menu_opened", function()
+    for _, entry in ipairs(cmp.get_entries()) do
+        print("Source:", entry.source.name)
+    end
+end)
+--]]
+
 cmp.setup({
     sources = {
         { name = 'nvim_lsp', keyword_length = 1 },
         { name = 'luasnip',  keyword_length = 1 },
         { name = 'path',     keyword_length = 2 },
-        { name = 'cmdline',  keyword_length = 3 },
+        -- { name = 'cmdline',  keyword_length = 3 },
         { name = 'buffer',   keyword_length = 5 },
     },
 
@@ -57,6 +66,16 @@ cmp.setup({
         autocomplete = {
             cmp.TriggerEvent.TextChanged,
             cmp.TriggerEvent.InsertEnter,
+        },
+    },
+
+    window = {
+        completion = {
+            border = 'rounded', --'single', 'double', 'rounded', 'shadow', 'none'
+            winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None',
+        },
+        documentation = {
+            border = 'rounded',
         },
     },
 })

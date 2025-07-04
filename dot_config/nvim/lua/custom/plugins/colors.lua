@@ -24,6 +24,11 @@ return {
                 transparent_background = true,
                 show_end_of_buffer = true,
                 --term_colors = true,
+                custom_highlights = function(colors)
+                    return {
+                        NormalFloat = { bg = '#24273A' }
+                    }
+                end
             })
         end
     },
