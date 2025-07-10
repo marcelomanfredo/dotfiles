@@ -15,10 +15,11 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
--- Stop "o" and "O" to insert line with comment
+-- Stop "o" and "O" to insert line with comment.
+-- Set textwidth limit to 120 characters in comment lines.
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "lua",
     callback = function()
+        vim.opt_local.textwidth = 120
         vim.opt_local.formatoptions:remove("o")
     end
 })
@@ -37,6 +38,8 @@ vim.opt.scrolloff = 8
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = "120"
 
 vim.opt.list = true
 vim.opt.listchars = {

@@ -31,7 +31,7 @@ vim.keymap.set('n', '<leader>/', function()
     builtin.current_buffer_fuzzy_find({ sorting_strategy = "ascending", previewer = false, layout_config = { prompt_position = "top" } })
 end, { desc = "Search current buffer" })
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files in current work directory" })
+vim.keymap.set('n', '<leader>fw', builtin.find_files, { desc = "Find files in current work directory" })
 
 vim.keymap.set('n', '<leader>fh', function() builtin.find_files({ hidden = true, no_ignore = true }) end,
     { desc = "Find files (including hidden) in current work directory" })
