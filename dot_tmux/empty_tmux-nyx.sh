@@ -23,10 +23,10 @@ tmux neww -t $SESSION:1 -n "Nyx" -c "$PROJECT_DIR/nyx" \
   "bash -c ' \
     nvim .; \
     exec zsh'"
-tmux splitw -h -t $SESSION:1 -c "$PROJECT_DIR/nyx" \
-  "bash -c ' \
-    cargo watch -c -q -w src -x run; \
-    exec zsh'"
+tmux splitw -h -t $SESSION:1 -c "$PROJECT_DIR/nyx"
+tmux splitw -v -t $SESSION:1 -c "$PROJECT_DIR/nyx"
+sleep 0.2
+tmux send-keys -t $SESSION:1.1 "cargo watch -c -q -w src -x \"run -q\""
 tmux resizep -t $SESSION:1.1 -x 2
 tmux selectp -t $SESSION:1.0
 
@@ -35,10 +35,9 @@ tmux neww -t $SESSION:2 -n "Nyx-Wasm" -c "$PROJECT_DIR/nyx-wasm" \
   "bash -c ' \
     nvim .; \
     exec zsh'"
-tmux splitw -h -t $SESSION:2 -c "$PROJECT_DIR/nyx-wasm" \
-  "bash -c ' \
-    trunk serve --open -c -q; \
-    exec zsh'"
+tmux splitw -h -t $SESSION:2 -c "$PROJECT_DIR/nyx-wasm"
+sleep 0.2
+tmux send-keys -t $SESSION:2.1 "trunk serve --open -c -q"
 tmux resizep -t $SESSION:2.1 -x 2
 tmux selectp -t $SESSION:2.0
 
