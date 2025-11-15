@@ -37,6 +37,19 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.isfname:append("@-@")
 
+-- Adjust screen to keep cursor at the center if it's the end of the file
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    callback = function()
+        local height = vim.api.nvim_win_get_height(0)
+        local cur_row = vim.fn.winline()
+        local scrolloff = vim.o.scrolloff
+
+        if cur_row > height - scrolloff then
+            vim.cmd("normal! zz")
+        end
+    end,
+})
+
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "120"

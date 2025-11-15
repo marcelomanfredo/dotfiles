@@ -44,7 +44,7 @@ status = f"{status[:16]}.." if len(status) > 17 else status
 # print(status)
 
 # status code
-status_code = html_data("#regionHeader").attr("class").split(" ")[2].split("-")[2]
+status_code = html_data("#regionHeader").attr("class").split(" ")[0].split("-")[0]
 # print(status_code)
 
 # status icon
