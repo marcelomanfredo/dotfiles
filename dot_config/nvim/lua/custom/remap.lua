@@ -1,7 +1,7 @@
 -- Quality of life
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = "Go to Project View (explorer)" })
 vim.keymap.set('n', 'J', 'mzJ`z',
-    { desc = "When appending lines with 'J', make cursor stay at the beggining of the line" })
+    { desc = "When appending lines with 'J', make cursor stay at the beginning of the line" })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Make cursor stay at the middle" })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Make cursor stay at the middle" })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = "Make cursor stay at the middle" })
@@ -38,7 +38,6 @@ vim.keymap.set('n', '<leader><leader>w',
         vim.opt.linebreak = not vim.opt.linebreak:get()
     end,
     { desc = "Toggle line wrap" })
-
 
 -- SQL dadbod
 vim.keymap.set('n', '<leader>sq', '<cmd>DBUIToggle<cr>')
@@ -109,3 +108,71 @@ local function sqruff_format()
     vim.notify("Formatting was successful", vim.log.levels.INFO)
 end
 vim.keymap.set('n', '<leader>fs', sqruff_format, { desc = "Format SQL files" })
+
+
+-- Spellcheck
+local function SpellCheckSelection()
+    if vim.fn.mode() ~= 'v' and vim.fn.mode() ~= 'V' then
+        print("Error: This works only in visual mode!")
+        return
+    end
+
+    -- Save original window and buffer
+    local orig_win = vim.api.nvim_get_current_win()
+    local orig_buf = vim.api.nvim_get_current_buf()
+
+    -- Yank the visual selection into register 'a'
+    vim.cmd('normal! "ay')
+
+    local selected_text = vim.fn.getreg('a')
+
+    -- Create a floating scratch buffer
+    local buf = vim.api.nvim_create_buf(true, true)
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = 'editor',
+        width = math.floor(vim.o.columns * 0.8),
+        height = math.floor(vim.o.lines * 0.8),
+        row = math.floor(vim.o.lines * 0.1),
+        col = math.floor(vim.o.columns * 0.1),
+        style = 'minimal',
+        border = 'rounded',
+        title = 'Spell Check',
+        title_pos = 'center',
+    })
+
+    -- Set buffer options
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(selected_text, '\n'))
+    vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
+    vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+    vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+    vim.api.nvim_buf_set_option(buf, 'spell', true)
+    vim.api.nvim_buf_set_option(buf, 'spelllang', 'en')
+    vim.api.nvim_buf_set_option(buf, 'spelloptions', 'camel')
+
+    -- Function to apply changes back to original selection
+    local function apply_changes()
+        local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+        local modified_text = table.concat(lines, '\n')
+
+        -- Go back to original window and buffer
+        vim.api.nvim_set_current_win(orig_win)
+        vim.api.nvim_set_current_buf(orig_buf)
+
+        -- Replace visual selection
+        vim.fn.setreg('a', modified_text)
+        vim.cmd('normal! gv"ap')
+
+        -- Close floating window
+        vim.api.nvim_win_close(win, true)
+    end
+
+    -- Keymaps for floating buffer
+    vim.keymap.set('n', '<leader>w', apply_changes, { buffer = buf, desc = 'Apply spell check' })
+    vim.keymap.set('n', '<leader>q', function()
+        vim.api.nvim_win_close(win, true)
+    end, { buffer = buf, desc = 'Close without applying' })
+
+    print("SpellCheck active. <leader>w to apply, <leader>q to close.")
+end
+--vim.keymap.set('v', '<leader>sc', SpellCheckSelection, { desc = 'Spell check selection' })

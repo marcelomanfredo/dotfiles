@@ -12,6 +12,9 @@ if vim.fn.getcwd():find(project_path, 1, true) == 1 then
 end
 ]]
 
+-- Help with LSP configs
+-- /home/manfredo/.local/share/nvim/lazy/nvim-lspconfig/doc/configs.md
+
 -- Lua
 lsp.lua_ls.setup {
     capabilities = capabilities,
@@ -90,4 +93,11 @@ lsp.emmet_language_server.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     filetypes = { "html", "css", "scss", "javascript", "typescript" },
+}
+
+-- Toml
+lsp.taplo.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "toml" },
 }

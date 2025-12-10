@@ -65,3 +65,14 @@ vim.opt.listchars = {
     nbsp = '˔',
     multispace = '␣'
 }
+
+-- Spell check
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "text", "markdown", "tex", "gitcommit" },
+    callback = function()
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = 'en'
+        vim.opt_local.spelloptions = "camel"
+    end,
+    desc = "Enable spell checking for text-based filetypes"
+})

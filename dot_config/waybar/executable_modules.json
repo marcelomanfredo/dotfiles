@@ -179,7 +179,7 @@
 
 	"custom/weather": {
 		//"exec": "python ~/.config/waybar/scripts/weather.py",
-		"exec": "~/.config/waybar/scripts/weather gl way -c Londrina -p BR",
+		"exec": "~/.local/bin/weather temp way -I --city Londrina --country BR",
 		"restart-interval": 1500,
 		"return-type": "json",
 		"on-click": "xdg-open https://weather.com/weather/today/l/0bbc6b68320163d2f1d618da708ea95c8c7990dd943e7994390646cd10b485bb?unit=m"
