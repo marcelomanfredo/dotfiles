@@ -27,28 +27,30 @@ window {
 
 .modules-right {
 	font-size: 11px;
-	color: @color8;
+	color: @color5;
 }
 
 tooltip {
 	background: alpha(@color0, 0.9);
-	border: 2px solid @color7;
+	border: 2px solid @color4;
 	border-radius: 10px;
 }
 
 tooltip label {
 	padding: 2px 5px;
-	color: @color7;
+	color: @color11;
 	font: 13px RobotoMonoNerdFont;
 }
 
 button {
 	font-size: 14px;
 	padding: 0 15px 0 5px;
-	color: @color8;
+	color: @color5;
+    transition: all 0.3s ease;
 }
 
 button:hover {
+    color: @color11;
 	transition: none;
 	background: transparent;
 	box-shadow: none;
@@ -58,7 +60,7 @@ button:hover {
 #workspaces {
 	margin: 3px;
 	padding: 0 5px;
-	border: 2px solid @color8;
+	border: 2px solid @color4;
 	border-radius: 30px;
 }
 
@@ -74,19 +76,19 @@ button:hover {
 }
 
 #idle_inhibitor {
-	padding: 0 15px 0 10px;		
+	padding: 0 18px 0 13px;
 }
 
 #idle_inhibitor.activated {
 	background: alpha(@color7, 0.25);
 	color: @color0;
-	border-radius: 100%;
+	border-radius: 50%;
 }
 
 #audio {
 	margin: 3px;
 	padding: 0 5px;
-	border: 2px solid @color8;
+	border: 2px solid @color4;
 	border-radius: 30px
 }
 
@@ -102,7 +104,7 @@ button:hover {
 #system {
 	margin: 3px;
 	padding: 0 5px;
-	border: 2px solid @color8;
+	border: 2px solid @color4;
 	border-radius: 30px;
 }
 
@@ -119,7 +121,7 @@ button:hover {
 #g-network {
 	margin: 3px;
 	padding: 0 5px;
-	border: 2px solid @color8;
+	border: 2px solid @color4;
 	border-radius: 30px;
 }
 
@@ -130,7 +132,7 @@ button:hover {
 #infos {
 	margin: 3px;
 	padding: 0 5px;
-	border: 2px solid @color8;
+	border: 2px solid @color4;
 	border-radius: 30px;
 }
 
@@ -152,11 +154,13 @@ button:hover {
 #network:hover,
 #clock:hover,
 #custom-weather:hover {
-	box-shadow: inset 0 1px @color8
+    color: @color11;
+	box-shadow: inset 0 1px @color4
 }
 
 #custom-power {
-	padding: 0 10px;
+	padding: 0 5px;
+    margin-right: 12px;
 	color: red;
 	text-shadow: 1px 1px 3px @error_color;
 }

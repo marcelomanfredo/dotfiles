@@ -12,7 +12,7 @@
     // ***********************************
     "modules-left": [
 	"custom/arch_logo",
-        "hyprland/workspaces"
+    "hyprland/workspaces"
     ],
     "modules-center": [
         "hyprland/window"
