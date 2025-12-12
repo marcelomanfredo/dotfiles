@@ -37,7 +37,7 @@
 		"locale": "en_US.UTF-8",
 		"timezone": "America/Sao_Paulo",
 		"format": "  {:%R%n%d\/%m\/%y}",
-		"tooltip-format": "<tt><span color='#ffead3' size='large' weight='bold'>󰸘  {:%B %Y}</span><small><span show='none'>{calendar}</span></small></tt>",
+		"tooltip-format": "<tt><span show='none'>{calendar}</span></tt>",
 		"actions": {
 			"on-scroll-up": "shift_down",
 			"on-scroll-down": "shift_up",
@@ -45,8 +45,11 @@
 		},
 		"calendar": {
 			"weeks-pos": "left",
+            "mode": "year",
+            "mode-mon-col": 3,
 			"format": {
-				"months":	"",
+				//"months":	"<span color='#ffead3' font_size='13pt'>󰸘  {}</span>",
+                "months":	"<span color='#ffead3'>{}</span>",
 				"days": 	"<span color='#ecc69d'><b>{}</b></span>",
 				"weeks":	"<span color='#99ffdd'><b>W{}</b></span>",
 				"weekdays":	"<span color='#ffcc66'><b>{}</b></span>",
