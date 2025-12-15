@@ -42,8 +42,8 @@ function precmd() {
     ZSH_THEME_GIT_PROMPT_CLEAN="@$(git_prompt_short_sha)%{${GIT_MAIN_COLOR}%}>%b %{${GIT_CLEAN_COLOR}%}%1{%}"
 
     if [[ -n $_start_sec ]]; then
-        _t_end=$EPOCHREALTIME
-        _end_sec=${_t_end%.*}
+        local _t_end=$EPOCHREALTIME
+        local _end_sec=${_t_end%.*}
 
         # Calculate how much time has passed (seconds first)
         local time_elapsed=$(( _end_sec - _start_sec ))
@@ -62,6 +62,7 @@ function precmd() {
         unset _end_sec _start_sec _t_start _t_end time_elapsed
         display_time=""
     fi
+    return 0
 }
 
 # Main Prompt

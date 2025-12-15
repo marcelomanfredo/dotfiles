@@ -113,4 +113,4 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Start Hyprlan if in tty1
-[ "$(tty)" = "/dev/tty1" ] && exec hyprland
+# [ "$(tty)" = "/dev/tty1" ] && exec hyprland # config moved to .zprofile
