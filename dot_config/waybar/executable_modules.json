@@ -45,11 +45,11 @@
 		},
 		"calendar": {
 			"weeks-pos": "left",
-            "mode": "year",
-            "mode-mon-col": 3,
+            "mode": "month",
+            //"mode-mon-col": 3,
 			"format": {
-				//"months":	"<span color='#ffead3' font_size='13pt'>󰸘  {}</span>",
-                "months":	"<span color='#ffead3'>{}</span>",
+				"months":	"<span color='#ffead3' font_size='13pt'>󰸘  {}</span>",
+                //"months":	"<span color='#ffead3'>{}</span>",
 				"days": 	"<span color='#ecc69d'><b>{}</b></span>",
 				"weeks":	"<span color='#99ffdd'><b>W{}</b></span>",
 				"weekdays":	"<span color='#ffcc66'><b>{}</b></span>",
