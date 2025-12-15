@@ -15,6 +15,7 @@ end
 -- Help with LSP configs
 -- /home/manfredo/.local/share/nvim/lazy/nvim-lspconfig/doc/configs.md
 
+
 -- Lua
 lsp.lua_ls.setup {
     capabilities = capabilities,
@@ -36,8 +37,7 @@ lsp.lua_ls.setup {
 }
 
 -- Rust
-lsp.rust_analyzer.setup {
-    capabilities = capabilities,
+lsp.rust_analyzer.setup { capabilities = capabilities,
     on_attach = on_attach,
     filetypes = { "rust" },
     settings = {
@@ -100,4 +100,11 @@ lsp.taplo.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     filetypes = { "toml" },
+}
+
+-- Shell
+lsp.bashls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "sh" },
 }
