@@ -58,3 +58,7 @@ vim.keymap.set('n', '<C-h>', '<cmd>TmuxNavigateLeft<CR>', { desc = "Easy navigat
 vim.keymap.set('n', '<C-j>', '<cmd>TmuxNavigateDown<CR>', { desc = "Easy navigation through tmux panels" })
 vim.keymap.set('n', '<C-k>', '<cmd>TmuxNavigateUp<CR>', { desc = "Easy navigation through tmux panels" })
 vim.keymap.set('n', '<C-l>', '<cmd>TmuxNavigateRight<CR>', { desc = "Easy navigation through tmux panels" })
+vim.keymap.set('n', '<M-[>', '<cmd>resize +5<CR>', { desc = "Increase current split height" })
+vim.keymap.set('n', '<M-]>', '<cmd>resize -5<CR>', { desc = "Increase current split height" })
+vim.keymap.set('n', '<M-.>', '<cmd>vertical resize +5<CR>', { desc = "Increase current split width" })
+vim.keymap.set('n', '<M-,>', '<cmd>vertical resize -5<CR>', { desc = "Increase current split width" })
