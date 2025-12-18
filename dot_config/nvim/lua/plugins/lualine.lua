@@ -1,7 +1,7 @@
 return {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
+        "nvim-tree/nvim-web-devicons",
     },
     opts = {
         options = {
@@ -10,19 +10,19 @@ return {
         sections = {
             lualine_c = {
                 {
-                    'filename',
+                    "filename",
                     newfile_status = true,
                     path = 1,
                 },
             },
             lualine_x = {
                 {
-                    'lsp_status',
-                    icon = '󰿘 ',
+                    "lsp_status",
+                    icon = "󰿘 ",
                 },
-                'encoding',
-                'fileformat',
-                'filetype',
+                "encoding",
+                "fileformat",
+                "filetype",
             },
         },
     },

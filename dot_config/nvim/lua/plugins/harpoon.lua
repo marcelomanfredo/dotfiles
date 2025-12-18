@@ -1,34 +1,34 @@
 return {
-    'ThePrimeagen/harpoon',
-    branch = 'harpoon2',
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
     dependencies = {
-        'nvim-lua/plenary.nvim'
+        "nvim-lua/plenary.nvim",
     },
     config = function()
-        local harpoon = require 'harpoon'
+        local harpoon = require("harpoon")
         harpoon:setup()
 
-        vim.keymap.set('n', '<leader>a', function()
+        vim.keymap.set("n", "<leader>a", function()
             harpoon:list():add()
-        end, { desc = 'Harpoon -> Add current buffer to list' })
-        vim.keymap.set('n', '<C-e>', function()
+        end, { desc = "Harpoon -> Add current buffer to list" })
+        vim.keymap.set("n", "<C-e>", function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
-        end, { desc = 'Harpoon -> Toggle menu' })
+        end, { desc = "Harpoon -> Toggle menu" })
 
-        vim.keymap.set('n', '<M-j>', function()
+        vim.keymap.set("n", "<M-j>", function()
             harpoon:list():select(1)
-        end, { desc = 'Harpoon -> Go to buffer 1', noremap = true, silent = true })
-        vim.keymap.set('n', '<M-k>', function()
+        end, { desc = "Harpoon -> Go to buffer 1", noremap = true, silent = true })
+        vim.keymap.set("n", "<M-k>", function()
             harpoon:list():select(2)
-        end, { desc = 'Harpoon -> Go to buffer 2', noremap = true, silent = true })
-        vim.keymap.set('n', '<M-l>', function()
+        end, { desc = "Harpoon -> Go to buffer 2", noremap = true, silent = true })
+        vim.keymap.set("n", "<M-l>", function()
             harpoon:list():select(3)
-        end, { desc = 'Harpoon -> Go to buffer 3', noremap = true, silent = true })
-        vim.keymap.set('n', '<M-ç>', function()
+        end, { desc = "Harpoon -> Go to buffer 3", noremap = true, silent = true })
+        vim.keymap.set("n", "<M-ç>", function()
             harpoon:list():select(4)
-        end, { desc = 'Harpoon -> Go to buffer 4', noremap = true, silent = true })
-        vim.keymap.set('n', '<M-~>', function()
+        end, { desc = "Harpoon -> Go to buffer 4", noremap = true, silent = true })
+        vim.keymap.set("n", "<M-~>", function()
             harpoon:list():select(5)
-        end, { desc = 'Harpoon -> Go to buffer 5', noremap = true, silent = true })
+        end, { desc = "Harpoon -> Go to buffer 5", noremap = true, silent = true })
     end,
 }

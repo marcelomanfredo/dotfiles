@@ -1,7 +1,7 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    build = ':TSUpdate',
+    build = ":TSUpdate",
     opts = {
         sync_install = true,
         highlight = {

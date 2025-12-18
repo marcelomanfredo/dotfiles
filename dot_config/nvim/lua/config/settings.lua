@@ -16,7 +16,7 @@ vim.opt.smartindent = true
 
 vim.opt_local.textwidth = width
 
-vim.opt_local.formatoptions:remove "o"
+vim.opt_local.formatoptions:remove("o")
 
 vim.opt.wrap = false
 
@@ -35,14 +35,14 @@ vim.opt.colorcolumn = tostring(width)
 
 vim.opt.list = true
 vim.opt.listchars = {
-    eol = '↲',
-    tab = '»·',
-    trail = '·',
-    lead = '·',
-    extends = '⟩',
-    precedes = '⟨',
-    nbsp = '˔',
-    multispace = '␣'
+    eol = "↲",
+    tab = "»·",
+    trail = "·",
+    lead = "·",
+    extends = "⟩",
+    precedes = "⟨",
+    nbsp = "˔",
+    multispace = "␣",
 }
 
 -- Spell check - maybe there's a plugin for grammar?

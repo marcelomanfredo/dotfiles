@@ -6,7 +6,11 @@ local M = {
         {
             "mason-org/mason-lspconfig.nvim",
             opts = {
-                --automatic_enable = false
+                automatic_enable = {
+                    exclude = {
+                        "stylua",
+                    },
+                },
                 ensure_installed = {
                     "lua_ls",
                     "rust_analyzer",
@@ -19,10 +23,14 @@ local M = {
     config = function()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local servers = {
-            "clangd",
-            "gopls",
             "lua_ls",
             "rust_analyzer",
+            "gopls",
+            "clangd",
+            "bashls",
+            "basedpyright",
+            "emmet_language_server",
+            "taplo",
         }
         for _, server in ipairs(servers) do
             vim.lsp.config(server, {
@@ -30,10 +38,11 @@ local M = {
             })
         end
 
-        -- Specific configs
-        vim.lsp.config('lua_ls', {
-            cmd = { 'lua-language-server' },
-            filetypes = { 'lua' },
+        -- [[ Specific configs ]]
+        -- Lua
+        vim.lsp.config("lua_ls", {
+            cmd = { "lua-language-server" },
+            filetypes = { "lua" },
             root_markers = {
                 ".luarc.json",
                 ".luarc.jsonc",
@@ -44,95 +53,66 @@ local M = {
             settings = {
                 Lua = {
                     runtime = {
-                        version = 'LuaJIT',
+                        version = "LuaJIT",
                     },
                     workspace = {
                         checkThirdParty = false,
                         library = {
-                            vim.env.VIMRUNTIME
+                            vim.env.VIMRUNTIME,
                         },
                     },
                 },
             },
         })
+
+        -- Rust: being managed by 'mrcjkb/rustaceanvim'
+        require("plugins/lsp/rust")
     end,
 }
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('LspConfig', { clear = true }),
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("LspConfig", { clear = true }),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-        if client:supports_method('textDocument/implementation') then
+        if client:supports_method("textDocument/implementation") then
             -- Keymaps
-            local opts = { buffer = args.buf, noremap = true, silent = true }
-
-            vim.keymap.set('n', '<leader>A', vim.lsp.buf.code_action,
-                vim.tbl_extend('force', opts,
-                    { desc = [[LSP -> Selects a code action (LSP: "textDocument/codeAction")]] }))
-
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Jumps to the declaration of the symbol under the cursor" }))
-
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Jumps to the definition of the symbol under the cursor" }))
-
-            vim.keymap.set('n', 'K', function()
-                    vim.lsp.buf.hover({ border = 'rounded' })
-            end, vim.tbl_extend('force', opts,
-                    { desc = "LSP -> Display hover information about the symbol under the cursor" }))
-
-            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,
-                vim.tbl_extend('force', opts,
-                    { desc = "LSP -> Lists all the implementations for the symbol under the cursor in the quickfix menu" })) -- maybe open in telescope?
-
-            vim.keymap.set({ 'i', 'n' }, '<C-p>', function()
-                vim.lsp.buf.signature_help({
-                    border = 'rounded',
-                    focusable = false,
-                })
-            end,
-                vim.tbl_extend('force', opts,
-                    { desc = "LSP -> Displays signature information about the symbol under the cursor" }))
-
-            vim.keymap.set('n', '<leader>wl', vim.lsp.buf.list_workspace_folders,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Lists workspace folders" }))
-
-            vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Add the folder at path to the workspace folders" }))
-
-            vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Remove the folder at path from the workspace folders" }))
-
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Jumps to the declaration of the symbol under the cursor" }))
-
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Jumps to the declaration of the symbol under the cursor" }))
-
-            vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition,
-                vim.tbl_extend('force', opts,
-                    { desc = "LSP -> Jumps to the definition of the type of the symbol under the cursor" }))
-
-            vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Renames all references to the symbol under the cursor" }))
-
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Lists all the references to the symbol under the cursor" }))
-
-            vim.keymap.set('n', '<leader>K', vim.diagnostic.open_float,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Show diagnostics in a floating window" }))
-
-            vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist,
-                vim.tbl_extend('force', opts, { desc = "LSP -> Add buffer diagnostics to the location list" }))
-
-            vim.keymap.set('n', '<leader>dh', function()
-                local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf })
-                vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = args.buf })
-            end, vim.tbl_extend('force', opts, { desc = "LSP -> Toggles inlay hints" }))
+            require("plugins/lsp/lsp-keymaps").keys(args)
         end
 
+        -- inlay_hints can be toggled with '<leader>dh'
         if client.server_capabilities.inlayHintProvider then
             vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+        end
+
+        -- Autoformat on save
+        if client.name == "null_ls" and client:supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("LspFormatting", { clear = false }),
+                buffer = args.buf,
+                callback = function()
+                    vim.lsp.buf.format({
+                        bufnr = args.buf,
+                        filter = function(client)
+                            if client.name == "null-ls" then
+                                return true
+                            end
+
+                            local clients = vim.lsp.get_clients({ bufnr = args.buf })
+                            local is_none_attached = false
+                            for _, c in ipairs(clients) do
+                                if c.name == "null-ls" and c:supports_method("textDocument/formatting") then
+                                    is_none_attached = true
+                                    break
+                                end
+                            end
+                            if not is_none_attached then
+                                return client:supports_method("textDocument/formatting")
+                            end
+                            return false -- fallback in case neither none-ls nor lsp has formatting capabilities
+                        end,
+                    })
+                end,
+            })
         end
 
         vim.diagnostic.config({
@@ -143,7 +123,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             --virtual_lines = true,
             float = {
                 source = true,
-                border = 'rounded',
+                border = "rounded",
             },
         })
     end,
