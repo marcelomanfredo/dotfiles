@@ -4,7 +4,9 @@ return {
         'nvim-tree/nvim-web-devicons',
     },
     opts = {
-        theme = "pywal",
+        options = {
+            theme = "pywal",
+        },
         sections = {
             lualine_c = {
                 {
