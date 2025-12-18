@@ -1,6 +1,6 @@
 local M = {}
 
-M.keys = function(args)
+function M.keys(args)
     local opts = { buffer = args.buf, noremap = true, silent = true }
 
     vim.keymap.set(

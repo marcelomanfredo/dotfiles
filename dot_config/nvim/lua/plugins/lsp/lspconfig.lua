@@ -1,0 +1,73 @@
+return {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+        "cmp",
+        "mason",
+        {
+            "mason-org/mason-lspconfig.nvim",
+            opts = {
+                automatic_enable = {
+                    exclude = {
+                        "stylua",
+                    },
+                },
+                ensure_installed = {
+                    "lua_ls",
+                    "rust_analyzer",
+                    "gopls",
+                    "clangd",
+                },
+            },
+        },
+    },
+    config = function()
+        -- call on_attach autocmd
+        require "plugins.lsp.utils.attach"
+
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local servers = {
+            "lua_ls",
+            --"rust_analyzer",
+            "gopls",
+            "clangd",
+            "bashls",
+            "basedpyright",
+            "emmet_language_server",
+            "taplo",
+        }
+        for _, server in ipairs(servers) do
+            vim.lsp.config(server, {
+                capabilities = capabilities,
+            })
+        end
+
+        -- [[ Specific configs ]]
+        -- Lua
+        vim.lsp.config("lua_ls", {
+            cmd = { "lua-language-server" },
+            filetypes = { "lua" },
+            root_markers = {
+                ".luarc.json",
+                ".luarc.jsonc",
+                ".luacheckrc",
+                ".stylua.toml",
+                ".git",
+            },
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = "LuaJIT",
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                        library = {
+                            vim.env.VIMRUNTIME,
+                        },
+                    },
+                },
+            },
+        })
+
+        -- Rust: being managed by 'mrcjkb/rustaceanvim'
+    end,
+}

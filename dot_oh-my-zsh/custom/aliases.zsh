@@ -2,7 +2,7 @@
 alias c="clear -x"
 alias temp="watch -n 10 nvidia-smi"
 alias ll="ls -lAShr"
-alias conf="chezmoi edit --apply --watch --color=true ~/.config/"
+alias conf="chezmoi edit --apply"
 
 # Postgres
 #alias psql="psql gondor"
