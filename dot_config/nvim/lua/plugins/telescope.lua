@@ -36,7 +36,6 @@ return {
         local telescope = require 'telescope'
         telescope.setup(opts)
         telescope.load_extension('fzf')
-
         local builtin = require 'telescope.builtin'
         local theme = require 'telescope.themes'
         local cwd = vim.fn.expand('%:p:h')
