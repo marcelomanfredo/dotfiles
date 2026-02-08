@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SESSION="nyx"
-PROJECT_DIR=~/Projects/Nyx
+PROJECT_DIR=~/dev/Nyx
 
 # Check if session exists
 tmux has-session -t $SESSION 2>/dev/null
@@ -41,7 +41,7 @@ tmux send-keys -t $SESSION:2.1 "trunk serve --open -c -q"
 tmux resizep -t $SESSION:2.1 -x 2
 tmux selectp -t $SESSION:2.0
 
-# Window 3: PostgreSQL (Check if 
+# Window 3: PostgreSQL (Check if
 tmux neww -t $SESSION:3 -n "DB" -c "$PROJECT_DIR" \
   "bash -c '\
     if ! systemctl is-active --quiet postgresql.service; then \

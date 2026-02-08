@@ -3,13 +3,16 @@
 monitor1=DP-1
 monitor2=HDMI-A-1
 timer=10800
-#timer=10
+#timer=2
 
 magick ~/.config/hypr/wallpapers/The_Witcher/Geralt_TW3.jpg -blur 0x20 ~/.cache/wal/blurred-wp.jpg
 
+echo 'hey'
 while true; do
     wallpaper1="$(find -L ~/.config/hypr/wallpapers -type f | shuf -n 1)"
+    echo wallpaper1 = $wallpaper1
     wallpaper2="$(find -L ~/.config/hypr/wallpapers -type f | shuf -n 1)"
+    echo wallpaper2 = $wallpaper2
 
     hyprctl hyprpaper preload "$wallpaper1"
     hyprctl hyprpaper preload "$wallpaper2"
@@ -18,14 +21,14 @@ while true; do
     hyprctl hyprpaper wallpaper "$monitor2,$wallpaper2"
 
     magick $wallpaper1 -blur 0x20 ~/.cache/wal/blurred-wp.jpg
-    
+
     wal -i $wallpaper2 -n
-    cp ~/.cache/wal/colors-waybar.css ~/.cache/wal/colors-waybar-m2.css 
+    cp ~/.cache/wal/colors-waybar.css ~/.cache/wal/colors-waybar-m2.css
 
     wal -i $wallpaper1 -n
     cp ~/.cache/wal/colors-waybar.css ~/.cache/wal/colors-waybar-m1.css
     ~/.config/hypr/scripts/create_colors.sh ~/.cache/wal/colors.json ~/.config/hypr/conf/colors.conf
-    
+
     sleep 2
 
     ~/.config/waybar/launch.sh

@@ -4,8 +4,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         if client:supports_method("textDocument/implementation") then
             -- Keymaps
-            require("plugins.lsp.utils.keymaps-lsp").keys(args)
+            require("plugins.lsp.utils.keymaps").keys(args)
         end
+
+        -- DAP Keymaps
+        local dap = require("dap")
+        vim.keymap.set("n", "<F1>", dap.step_into, { desc = "DAP -> Step into", silent = true, noremap = true })
+        vim.keymap.set("n", "<F2>", dap.step_over, { desc = "DAP -> Step over", silent = true, noremap = true })
+        vim.keymap.set("n", "<F3>", dap.step_out, { desc = "DAP -> Step out", silent = true, noremap = true })
+        vim.keymap.set("n", "<F4>", dap.step_back, { desc = "DAP -> Step back", silent = true, noremap = true })
+        vim.keymap.set("n", "<F5>", dap.continue, { desc = "DAP -> Continue", silent = true, noremap = true })
+        vim.keymap.set(
+            "n",
+            "<leader>b",
+            dap.toggle_breakpoint,
+            { desc = "DAP -> Toggle breakpoint", silent = true, noremap = true }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>B",
+            "<cmd>lua dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+            { desc = "DAP -> Toggle conditional breakpoint", silent = true, noremap = true }
+        )
+        vim.keymap.set("n", "<leader>c", dap.run_to_cursor, { desc = "Dap -> Run until cursor" })
+        vim.keymap.set("n", "<leader>?", function()
+            require("dapui").eval(nil, { enter = true })
+        end, { desc = "DAP -> Eval var under cursor" })
 
         -- inlay_hints can be toggled with '<leader>dh'
         if client.server_capabilities.inlayHintProvider then

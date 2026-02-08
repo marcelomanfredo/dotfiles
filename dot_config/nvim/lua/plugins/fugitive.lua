@@ -13,6 +13,7 @@ return {
         local group = vim.api.nvim_create_augroup("Git", { clear = true })
         vim.api.nvim_create_autocmd("FileType", {
             group = group,
+            pattern = "fugitive",
             callback = function()
                 local bufnr = vim.api.nvim_get_current_buf()
                 vim.keymap.set("n", "<leader>p", function()

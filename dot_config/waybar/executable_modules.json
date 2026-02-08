@@ -57,7 +57,7 @@
 			}
 		}
 	},
-	
+
 	"cpu": {
         	"format": "{usage:2}% ",
 	        "tooltip": true
@@ -165,7 +165,7 @@
 		"on-scroll-up": "playerctl previous",
             "on-scroll-down": "playerctl next",
 		"exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-		"format-icons": { 
+		"format-icons": {
 			"spotify": "󰓇",
 			"firefox": "",
 			"chrome":  "",
