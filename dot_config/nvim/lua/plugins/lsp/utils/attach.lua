@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set(
             "n",
             "<leader>B",
-            "<cmd>lua dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+            "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
             { desc = "DAP -> Toggle conditional breakpoint", silent = true, noremap = true }
         )
         vim.keymap.set("n", "<leader>c", dap.run_to_cursor, { desc = "Dap -> Run until cursor" })

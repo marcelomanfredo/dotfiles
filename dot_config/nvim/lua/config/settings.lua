@@ -1,4 +1,4 @@
-local width = 80
+local width = 120
 
 -- No cursor overlay in Neovim
 vim.opt.guicursor = ""
