@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # ----------------------------------------------
 # Quit all running waybar instances

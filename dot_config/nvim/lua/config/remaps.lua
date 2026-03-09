@@ -46,6 +46,21 @@ end, { desc = "Toggle line wrap" })
 vim.keymap.set("n", "<leader><leader>l", function()
     vim.opt_local.list = not vim.opt_local.list:get()
 end, { desc = 'Toggle the "list" option, which shows/hide non-printable characters' })
+vim.keymap.set("n", "<leader>x", function()
+    vim.cmd("write")
+    local file = vim.fn.expand("%")
+    local ft = vim.bo.filetype
+
+    if ft == "python" then
+        vim.cmd("!python " .. file)
+    elseif ft == "lua" then
+        vim.cmd("!lua " .. file)
+    elseif ft == "sh" then
+        vim.cmd("!. " .. file)
+    else
+        print("No runner configured for " .. ft)
+    end
+end, { desc = "Run current script" })
 
 -- Stolen from the GOAT TJ /
 vim.keymap.set("n", "j", function()
