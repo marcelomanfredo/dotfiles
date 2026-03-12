@@ -13,6 +13,20 @@ background-opacity = 0.8
 background-blur = true
 
 # QoL
-wait-after-command = true
+#wait-after-command = true
 clipboard-paste-protection = true
 clipboard-trim-trailing-spaces = true
+
+# Keybinds
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+l=goto_split:right
+
+keybind = ctrl+shift+j=scroll_page_down
+keybind = ctrl+shift+k=scroll_page_up
+
+keybind = ctrl+alt+h=new_split:left
+keybind = ctrl+alt+j=new_split:down
+keybind = ctrl+alt+k=new_split:up
+keybind = ctrl+alt+l=new_split:right
