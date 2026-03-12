@@ -130,8 +130,8 @@
 		// credits: "custom/pulseaudio-cycle", available on Wiki
         "on-click": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")+1)%length)]\" | xargs pactl set-default-sink",
 		"on-click-right": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")-1)%length)]\" | xargs pactl set-default-sink",
-        "on-click-middle": "lua ~/.config/waybar/scripts/change_sink.lua restore",
-        "on-double-click-middle": "lua ~/.config/waybar/scripts/change_sink.lua split",
+        "on-click-forward": "lua ~/.config/waybar/scripts/change_sink.lua split",
+        "on-click-backward": "lua ~/.config/waybar/scripts/change_sink.lua restore",
 		"tooltip-format": "{desc}",
 		"max-voume": 100
 	},

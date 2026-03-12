@@ -1,0 +1,18 @@
+# Font
+font-family = RobotoMono Nerd Font
+font-size = 10
+
+# Cursor
+cursor-style = block
+mouse-hide-while-typing = true
+shell-integration-features = no-cursor
+
+# Theme
+theme = /home/manfredo/.cache/wal/ghostty.conf
+background-opacity = 0.8
+background-blur = true
+
+# QoL
+wait-after-command = true
+clipboard-paste-protection = true
+clipboard-trim-trailing-spaces = true
