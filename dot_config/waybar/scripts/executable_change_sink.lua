@@ -60,6 +60,7 @@ local function init()
 			other = true
 		end
 	end
+	print(apps_count, firefox, other, should_split)
 	if apps_count > 1 and firefox and other then
 		should_split = true
 	end
