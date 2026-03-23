@@ -31,13 +31,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 local query = vim.fn.input("# ")
                 vim.cmd.RustLsp("workspaceSymbol", "allSymbols", query)
             end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Search symbol under the cursor" }))
-
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
-                callback = function()
-                    vim.cmd.RustFmt()
-                end,
-            })
         end
 
         -- DAP Keymaps
@@ -70,11 +63,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         -- Autoformat on save
-        if client.name == "null_ls" and client:supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
                 group = vim.api.nvim_create_augroup("LspFormatting", { clear = false }),
                 buffer = args.buf,
                 callback = function()
+                    local ft = vim.bo[args.buf].filetype
+                    if ft == "rust" then
+                        vim.cmd.RustFmt()
+                        return
+                    end
                     vim.lsp.buf.format({
                         bufnr = args.buf,
                         filter = function(client)
