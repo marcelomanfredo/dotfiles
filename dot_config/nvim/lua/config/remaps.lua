@@ -82,10 +82,10 @@ end, { expr = true, desc = "Navigate through wrapped lines easily" })
 -- /
 
 -- Splits
-vim.keymap.set("n", "<C-h>", "<C-w>(h)", { desc = "Easy navigation through splits" })
-vim.keymap.set("n", "<C-j>", "<C-w>(j)", { desc = "Easy navigation through splits" })
-vim.keymap.set("n", "<C-k>", "<C-w>(k)", { desc = "Easy navigation through splits" })
-vim.keymap.set("n", "<C-l>", "<C-w>(l)", { desc = "Easy navigation through splits" })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Easy navigation through splits" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Easy navigation through splits" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Easy navigation through splits" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Easy navigation through splits" })
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "Easy navigation through tmux panels" })
 vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "Easy navigation through tmux panels" })
 vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Easy navigation through tmux panels" })

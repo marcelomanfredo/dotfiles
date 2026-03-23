@@ -145,26 +145,39 @@ return {
         })
 
         -- SQL
-        -- [[
-        -- vim.g.loaded_sql_complete = 1
-        -- vim.api.nvim_create_autocmd('FileType', {
-        -- group = vim.api.nvim_create_augroup('CmpSQL', { clear = true }),
-        -- pattern = "sql",
-        -- callback = function()
-        -- Disable these problematic keymaps from builtin
-        -- local keys = { "<C-C>v", "<C-C>c", "<C-C>s", "<C-C>f", "<C-C>L", "<C-C>k", "<C-C>o", "<C-C>T", "<C-C>l", "<C-C>R", "<C-C>p", "<C-C>a", "<C-C>t", "<C-C>v" }
-        -- for _, key in ipairs(keys) do
-        -- pcall(vim.api.nvim_buf_del_keymap, 0, 'i', key)
-        -- end
-        -- end
-        -- })
-        -- cmp.setup.filetype({ 'sql' } , {
-        -- sources = {
-        -- { name = "vim-dadbod-completion" },
-        -- { name = "buffer" },
-        -- },
-        -- })
-        -- ]]
+        vim.g.loaded_sql_complete = 1
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("CmpSQL", { clear = true }),
+            pattern = "sql",
+            callback = function()
+                -- Disable these problematic keymaps from builtin
+                local keys = {
+                    "<C-C>v",
+                    "<C-C>c",
+                    "<C-C>s",
+                    "<C-C>f",
+                    "<C-C>L",
+                    "<C-C>k",
+                    "<C-C>o",
+                    "<C-C>T",
+                    "<C-C>l",
+                    "<C-C>R",
+                    "<C-C>p",
+                    "<C-C>a",
+                    "<C-C>t",
+                    "<C-C>v",
+                }
+                for _, key in ipairs(keys) do
+                    pcall(vim.api.nvim_buf_del_keymap, 0, "i", key)
+                end
+            end,
+        })
+        cmp.setup.filetype({ "sql" }, {
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" },
+            },
+        })
 
         vim.api.nvim_set_hl(0, "CmpItemMenu", { bg = "NONE", fg = "#808080" })
         --vim.api.nvim_set_hl(0, 'CmpItemAbbr', { bg='NONE', fg='#808080' })

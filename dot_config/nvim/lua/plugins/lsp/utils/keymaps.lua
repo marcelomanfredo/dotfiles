@@ -82,20 +82,6 @@ function M.keys(args)
 
     vim.keymap.set(
         "n",
-        "gD",
-        vim.lsp.buf.declaration,
-        vim.tbl_extend("force", opts, { desc = "LSP -> Jumps to the declaration of the symbol under the cursor" })
-    )
-
-    vim.keymap.set(
-        "n",
-        "gD",
-        vim.lsp.buf.declaration,
-        vim.tbl_extend("force", opts, { desc = "LSP -> Jumps to the declaration of the symbol under the cursor" })
-    )
-
-    vim.keymap.set(
-        "n",
         "<leader>D",
         vim.lsp.buf.type_definition,
         vim.tbl_extend(

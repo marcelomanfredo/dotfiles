@@ -7,6 +7,39 @@ vim.api.nvim_create_autocmd("LspAttach", {
             require("plugins.lsp.utils.keymaps").keys(args)
         end
 
+        if client.name == "rust-analyzer" then
+            local opts = { buffer = args.buf, noremap = true, silent = true }
+
+            -- Overwrite keymaps and rustaceanvim specifics
+            vim.keymap.set("n", "K", function()
+                vim.cmd.RustLsp("hover", "actions")
+            end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Hover actions" }))
+            vim.keymap.set("n", "<leader>A", function()
+                vim.cmd.RustLsp("codeAction")
+            end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Code actions" }))
+            vim.keymap.set("n", "<leader>e", function()
+                vim.cmd.RustLsp("explainError", "cycle")
+            end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Explain error" }))
+            vim.keymap.set("n", "<leader>E", function()
+                vim.cmd.RustLsp("renderDiagnostic", "cycle")
+            end, vim.tbl_extend(
+                "force",
+                opts,
+                { desc = "Lsp[Rust] -> Render diagnostic (like `cargo build`)" }
+            ))
+            vim.keymap.set("n", "sd", function()
+                local query = vim.fn.input("# ")
+                vim.cmd.RustLsp("workspaceSymbol", "allSymbols", query)
+            end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Search symbol under the cursor" }))
+
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
+                callback = function()
+                    vim.cmd.RustFmt()
+                end,
+            })
+        end
+
         -- DAP Keymaps
         local dap = require("dap")
         vim.keymap.set("n", "<F1>", dap.step_into, { desc = "DAP -> Step into", silent = true, noremap = true })

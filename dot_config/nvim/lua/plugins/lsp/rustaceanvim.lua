@@ -3,9 +3,25 @@ return {
     version = "^6",
     lazy = false,
     config = function()
-        vim.lsp.config("rust_analyzer", {
+        vim.g.rustaceanvim = {
+            server = {
+                settings = {
+                    ["rust-analyzer"] = {
+                        workspace = {
+                            symbol = {
+                                search = {
+                                    kind = "all_symbols",
+                                    scope = "workspace_and_dependencies",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        }
+        vim.lsp.config("rust-analyzer", {
             root_markers = {
-                ".git",
+                ".git/",
                 ".gitignore",
                 "Cargo.toml",
                 "Cargo.lock",
