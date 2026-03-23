@@ -18,11 +18,6 @@ clipboard-paste-protection = true
 clipboard-trim-trailing-spaces = true
 
 # Keybinds
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:down
-keybind = ctrl+k=goto_split:up
-keybind = ctrl+l=goto_split:right
-
 keybind = ctrl+shift+j=scroll_page_down
 keybind = ctrl+shift+k=scroll_page_up
 
