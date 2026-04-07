@@ -115,8 +115,8 @@ function M.keys(args)
     vim.keymap.set(
         "n",
         "<leader>q",
-        vim.diagnostic.setloclist,
-        vim.tbl_extend("force", opts, { desc = "LSP -> Add buffer diagnostics to the location list" })
+        vim.diagnostic.setqflist,
+        vim.tbl_extend("force", opts, { desc = "LSP -> Add diagnostics to the quickfix list" })
     )
 
     vim.keymap.set("n", "<leader>dh", function()
