@@ -4,7 +4,7 @@ function M.keys(args)
     local opts = { buffer = args.buf, noremap = true, silent = true }
 
     vim.keymap.set(
-        "n",
+        { "n", "v" },
         "<leader>A",
         vim.lsp.buf.code_action,
         vim.tbl_extend("force", opts, { desc = [[LSP -> Selects a code action (LSP: "textDocument/codeAction")]] })

@@ -18,19 +18,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 vim.cmd.RustLsp("codeAction")
             end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Code actions" }))
             vim.keymap.set("n", "<leader>e", function()
-                vim.cmd.RustLsp("explainError", "cycle")
+                vim.cmd.RustLsp("explainError", "current")
             end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Explain error" }))
             vim.keymap.set("n", "<leader>E", function()
-                vim.cmd.RustLsp("renderDiagnostic", "cycle")
+                vim.cmd.RustLsp("renderDiagnostic", "current")
             end, vim.tbl_extend(
                 "force",
                 opts,
                 { desc = "Lsp[Rust] -> Render diagnostic (like `cargo build`)" }
             ))
             vim.keymap.set("n", "sd", function()
-                local query = vim.fn.input("# ")
-                vim.cmd.RustLsp("workspaceSymbol", "allSymbols", query)
+                vim.cmd.RustLsp("workspaceSymbol", "allSymbols")
             end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Search symbol under the cursor" }))
+            vim.keymap.set("n", "<leader>C", function()
+                vim.cmd.RustLsp("openCargo")
+            end, vim.tbl_extend("force", opts, { desc = "Lsp[Rust] -> Open Cargo.toml" }))
         end
 
         -- DAP Keymaps
@@ -105,7 +107,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             virtual_text = true,
             --virtual_lines = true,
             float = {
-                source = true,
+                source = "if_many",
                 border = "rounded",
             },
         })

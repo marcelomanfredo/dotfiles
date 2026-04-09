@@ -4,9 +4,18 @@ return {
     lazy = false,
     config = function()
         vim.g.rustaceanvim = {
+            tools = {
+                float_win_config = {
+                    source = "if_many",
+                    border = "rounded",
+                },
+            },
             server = {
                 settings = {
                     ["rust-analyzer"] = {
+                        cargo = {
+                            allFeatures = true,
+                        },
                         workspace = {
                             symbol = {
                                 search = {
