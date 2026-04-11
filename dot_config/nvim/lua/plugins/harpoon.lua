@@ -24,10 +24,10 @@ return {
         vim.keymap.set("n", "<M-l>", function()
             harpoon:list():select(3)
         end, { desc = "Harpoon -> Go to buffer 3", noremap = true, silent = true })
-        vim.keymap.set("n", "<M-ç>", function()
+        vim.keymap.set("n", "<M-i>", function()
             harpoon:list():select(4)
         end, { desc = "Harpoon -> Go to buffer 4", noremap = true, silent = true })
-        vim.keymap.set("n", "<M-~>", function()
+        vim.keymap.set("n", "<M-o>", function()
             harpoon:list():select(5)
         end, { desc = "Harpoon -> Go to buffer 5", noremap = true, silent = true })
     end,
