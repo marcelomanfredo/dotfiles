@@ -10,7 +10,7 @@ local M = {
 	sql = "dbeaver",
 	obs = "obs",
 	dolphin = "dolphin",
-	audio = 'pactl move-sink-input "$(pactl -f json list sink-inputs | jq -r \'.[] | "\\(.index)\\t\\(.properties["media.name"])"\' | wofi --dmenu | awk \'{print $1}\')" "$(pactl -f json list sinks | jq -r \'.[] | "\\(.index)\\t\\(.description)"\' | wofi --dmenu | awk \'{print $1}\')"',
+	audio = 'input=$(pactl -f json list sink-inputs | jq -r \'.[] | "\\(.index)\\t\\(.properties["media.name"])"\' | wofi --dmenu | awk \'{print $1}\') && [[ -n "$input" ]] && sink=$(pactl -f json list sinks | jq -r \'.[] | "\\(.index)\\t\\(.description)"\' | wofi --dmenu | awk \'{print $1}\') && [[ -n "$sink" ]] && pactl move-sink-input "$input" "$sink"',
 }
 
 return M
