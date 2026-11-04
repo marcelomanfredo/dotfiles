@@ -33,6 +33,7 @@ hl.bind(mainMod .. " + d", layout("removemaster"))
 hl.bind(mainMod .. " + RETURN", cmd(var.terminal))
 hl.bind(mainMod .. " + r", cmd(var.menu))
 hl.bind(mainMod .. " + v", cmd(var.cliphist))
+hl.bind(mainMod .. " + e", cmd(var.dolphin))
 hl.bind(mainMod .. " + ALT + p", cmd("hyprpicker -an"))
 hl.bind(mainMod .. " + ALT + q", cmd("wlogout"))
 hl.bind(mainMod .. " + ALT + l", cmd("hyprlock"))
@@ -45,6 +46,9 @@ hl.bind(mainMod .. " + SHIFT + x", cmd(var.terminal))
 hl.bind(mainMod .. " + SHIFT + d", cmd(var.discord))
 hl.bind(mainMod .. " + SHIFT + s", cmd(var.steam))
 hl.bind(mainMod .. " + SHIFT + w", cmd("~/.config/waybar/launch.sh"))
+hl.bind(mainMod .. " + SHIFT + o", cmd(var.obs))
+hl.bind(mainMod .. " + SHIFT + ALT + c", (cmd("cursor")))
+hl.bind(mainMod .. " + SHIFT + ALT + a", cmd(var.audio))
 hl.bind(
 	mainMod .. " + SHIFT + g",
 	cmd(

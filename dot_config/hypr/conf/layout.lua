@@ -2,6 +2,8 @@
 --------- Layouts ----------
 ----------------------------
 
+local DIM_INACTIVE = false
+
 hl.config({
 	general = {
 		layout = "dwindle",
@@ -28,7 +30,7 @@ hl.config({
 		active_opacity = 0.95,
 		inactive_opacity = 0.95,
 		fullscreen_opacity = 0.95,
-		dim_inactive = true,
+		dim_inactive = DIM_INACTIVE,
 		dim_strength = 0.4525,
 
 		shadow = {
@@ -79,6 +81,7 @@ hl.config({
 		force_default_wallpaper = 0,
 		focus_on_activate = false,
 		mouse_move_focuses_monitor = false,
+		allow_session_lock_restore = true,
 	},
 
 	cursor = {
